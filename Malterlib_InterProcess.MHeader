@@ -5,9 +5,9 @@ Import "../Core/Lib_Malterlib.MTarget"
 
 %Group "{Malterlib}/{Lib_Malterlib_InterProcess}"
 {
-	%Group InterProcess
+	%Group "InterProcess"
 	{
-		%Group Include
+		%Group "Include"
 		{
 			Compile.Type "C++"
 			{
@@ -16,7 +16,7 @@ Import "../Core/Lib_Malterlib.MTarget"
 			%File "Include/Mib/InterProcess/^*"
 		}
 		%File "Source/*"
-		%Group Documentation
+		%Group "Documentation"
 		{
 			%File "Documentation/*"
 		}
