@@ -17,7 +17,7 @@ namespace
 
 		void f_DoTests()
 		{
-			void *pMemory;
+			[[maybe_unused]] void *pMemory;
 			NMib::NInterProcess::CSharedMemory SharedMem;
 			try
 			{
