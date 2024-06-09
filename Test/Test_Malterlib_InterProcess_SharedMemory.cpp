@@ -17,24 +17,27 @@ namespace
 
 		void f_DoTests()
 		{
-			[[maybe_unused]] void *pMemory;
-			NMib::NInterProcess::CSharedMemory SharedMem;
-			try
+			DMibTestSuite("General")
 			{
-				SharedMem = NMib::NInterProcess::CSharedMemory("Global\\MalterlibSharedMemoryTest", 1024);
-				pMemory = SharedMem;
-			}
-			catch (NMib::NException::CException const &)
-			{
+				[[maybe_unused]] void *pMemory;
+				NMib::NInterProcess::CSharedMemory SharedMem;
 				try
 				{
-					SharedMem = NMib::NInterProcess::CSharedMemory("Local\\MalterlibSharedMemoryTest", 1024);
+					SharedMem = NMib::NInterProcess::CSharedMemory("Global\\MalterlibSharedMemoryTest", 1024);
 					pMemory = SharedMem;
 				}
 				catch (NMib::NException::CException const &)
 				{
+					try
+					{
+						SharedMem = NMib::NInterProcess::CSharedMemory("Local\\MalterlibSharedMemoryTest", 1024);
+						pMemory = SharedMem;
+					}
+					catch (NMib::NException::CException const &)
+					{
+					}
 				}
-			}
+			};
 		}		
 	};
 
