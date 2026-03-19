@@ -38,7 +38,7 @@ namespace NMib::NInterProcess
 			, m_pMemory(nullptr)
 		{
 		}
-		CSharedMemory(ch8 const *_pName, mint _Size)
+		CSharedMemory(ch8 const *_pName, umint _Size)
 			: m_pHandle(nullptr)
 		{
 			m_pHandle = NSys::fg_InterProcess_MemAlloc(_pName, _Size, m_pMemory);
