@@ -10,7 +10,6 @@ namespace
 	class CMemory_Tests : public CTest
 	{
 	public:
-
 		CMemory_Tests()
 		{
 		}
@@ -42,6 +41,5 @@ namespace
 	};
 
 	DMibTestRegister(CMemory_Tests, Malterlib::InterProcess);
-
 }
 
