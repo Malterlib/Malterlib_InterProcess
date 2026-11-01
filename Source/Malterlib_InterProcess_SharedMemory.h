@@ -16,6 +16,7 @@ namespace NMib::NInterProcess
 			if (m_pHandle)
 				NSys::fg_InterProcess_MemFree(m_pHandle, m_pMemory);
 		}
+
 	public:
 		CSharedMemory(CSharedMemory &&_Other)
 			: m_pHandle(_Other.m_pHandle)
@@ -24,6 +25,7 @@ namespace NMib::NInterProcess
 			_Other.m_pHandle = nullptr;
 			_Other.m_pMemory = nullptr;
 		}
+
 		CSharedMemory &operator = (CSharedMemory &&_Other)
 		{
 			fp_Destroy();
@@ -33,16 +35,19 @@ namespace NMib::NInterProcess
 			_Other.m_pMemory = nullptr;
 			return *this;
 		}
+
 		CSharedMemory()
 			: m_pHandle(nullptr)
 			, m_pMemory(nullptr)
 		{
 		}
+
 		CSharedMemory(ch8 const *_pName, umint _Size)
 			: m_pHandle(nullptr)
 		{
 			m_pHandle = NSys::fg_InterProcess_MemAlloc(_pName, _Size, m_pMemory);
 		}
+
 		~CSharedMemory()
 		{
 			fp_Destroy();
@@ -58,7 +63,7 @@ namespace NMib::NInterProcess
 			return m_pMemory;
 		}
 
-		operator void *() const
+		operator void * () const
 		{
 			return m_pMemory;
 		}
@@ -78,6 +83,7 @@ namespace NMib::NInterProcess
 			: CSharedMemory(_pName, sizeof(t_CType))
 		{
 		}
+
 		TCSharedMemory()
 		{
 		}
@@ -86,6 +92,7 @@ namespace NMib::NInterProcess
 		{
 			return *((t_CType *)this->f_GetMem());
 		}
+
 		t_CType const &f_Get() const
 		{
 			return *((t_CType const *)this->f_GetMem());
@@ -94,5 +101,5 @@ namespace NMib::NInterProcess
 }
 
 #ifndef DMibPNoShortCuts
-	using namespace NMib::NInterProcess;
+using namespace NMib::NInterProcess;
 #endif
