@@ -7,9 +7,8 @@ namespace
 {
 	using namespace NMib::NTest;
 
-	class CMemory_Tests : public CTest
+	struct CMemory_Tests : public CTest
 	{
-	public:
 		CMemory_Tests()
 		{
 		}

@@ -5,19 +5,8 @@
 
 namespace NMib::NInterProcess
 {
-	class CSharedMemory
+	struct CSharedMemory
 	{
-		void *m_pHandle;
-		void *m_pMemory;
-		CSharedMemory(CSharedMemory const &);
-		CSharedMemory &operator = (CSharedMemory const &);
-		void fp_Destroy()
-		{
-			if (m_pHandle)
-				NSys::fg_InterProcess_MemFree(m_pHandle, m_pMemory);
-		}
-
-	public:
 		CSharedMemory(CSharedMemory &&_Other)
 			: m_pHandle(_Other.m_pHandle)
 			, m_pMemory(_Other.m_pMemory)
@@ -72,12 +61,22 @@ namespace NMib::NInterProcess
 		{
 			return m_pHandle;
 		}
+
+	private:
+		void *m_pHandle;
+		void *m_pMemory;
+		CSharedMemory(CSharedMemory const &);
+		CSharedMemory &operator = (CSharedMemory const &);
+		void fp_Destroy()
+		{
+			if (m_pHandle)
+				NSys::fg_InterProcess_MemFree(m_pHandle, m_pMemory);
+		}
 	};
 
 	template <typename t_CType>
-	class TCSharedMemory : protected CSharedMemory
+	struct TCSharedMemory : protected CSharedMemory
 	{
-	public:
 		using CSharedMemory::f_GetHandle;
 		TCSharedMemory(ch8 const *_pName)
 			: CSharedMemory(_pName, sizeof(t_CType))
