@@ -65,8 +65,8 @@ namespace NMib::NInterProcess
 	private:
 		void *m_pHandle;
 		void *m_pMemory;
-		CSharedMemory(CSharedMemory const &);
-		CSharedMemory &operator = (CSharedMemory const &);
+		CSharedMemory(CSharedMemory const &_Other);
+		CSharedMemory &operator = (CSharedMemory const &_Other);
 		void fp_Destroy()
 		{
 			if (m_pHandle)
