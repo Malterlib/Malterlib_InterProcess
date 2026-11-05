@@ -9,35 +9,39 @@ namespace
 
 	struct CMemory_Tests : public CTest
 	{
-		CMemory_Tests()
-		{
-		}
+		CMemory_Tests();
 
-		void f_DoTests()
+		void f_DoTests();
+	};
+
+	CMemory_Tests::CMemory_Tests()
+	{
+	}
+
+	void CMemory_Tests::f_DoTests()
+	{
+		DMibTestSuite("General")
 		{
-			DMibTestSuite("General")
+			[[maybe_unused]] void *pMemory;
+			NMib::NInterProcess::CSharedMemory SharedMem;
+			try
 			{
-				[[maybe_unused]] void *pMemory;
-				NMib::NInterProcess::CSharedMemory SharedMem;
+				SharedMem = NMib::NInterProcess::CSharedMemory("Global\\MalterlibSharedMemoryTest", 1024);
+				pMemory = SharedMem;
+			}
+			catch (NMib::NException::CException const &)
+			{
 				try
 				{
-					SharedMem = NMib::NInterProcess::CSharedMemory("Global\\MalterlibSharedMemoryTest", 1024);
+					SharedMem = NMib::NInterProcess::CSharedMemory("Local\\MalterlibSharedMemoryTest", 1024);
 					pMemory = SharedMem;
 				}
 				catch (NMib::NException::CException const &)
 				{
-					try
-					{
-						SharedMem = NMib::NInterProcess::CSharedMemory("Local\\MalterlibSharedMemoryTest", 1024);
-						pMemory = SharedMem;
-					}
-					catch (NMib::NException::CException const &)
-					{
-					}
 				}
-			};
-		}
-	};
+			}
+		};
+	}
 
 	DMibTestRegister(CMemory_Tests, Malterlib::InterProcess);
 }
